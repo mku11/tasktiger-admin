@@ -49,9 +49,12 @@ class Graph:
                     edges[edge_id] = edge
 
     def get_label(self, task: Task):
-        label = task.id[0:6] + "\n"
-        label += "queue: " + task.queue + "\n"
-        label += "state: " + task.state + "\n"
+        label = "ID: " + task.id[0:6] + "\n"
+        label += "Run At: " + task.ts.strftime("%Y-%m-%d %H:%M:%S") + "\n"
+        label += "Queue: " + task.queue + "\n"
+        label += "State: " + task.state + "\n"
+        label += "Func: " + task.serialized_func + "\n"
+        label += "Args: " + str(task.args) + " " + str(task.kwargs) + "\n"
         return label
 
 

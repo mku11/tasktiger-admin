@@ -27,7 +27,8 @@ function load_graph_data(data) {
             font: {
                 face: 'monospace',
                 size: 14,
-                color: 'black'
+                color: 'black',
+                align: 'left'
             }
         },
         edges: {
