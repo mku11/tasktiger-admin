@@ -108,6 +108,7 @@ class TaskTigerView(BaseView):
             task_data_dumped=json.dumps(task.data, indent=2, sort_keys=True),
             executions_dumped=reversed(executions_dumped),
             integrations=integrations,
+            task_dependencies=task.get_dependencies(),
         )
 
     @expose("/<queue>/<state>/<task_id>/retry/", methods=["POST"])
