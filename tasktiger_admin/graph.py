@@ -40,7 +40,10 @@ class Graph:
         nodes[task.id] = node
         node.level = level
         visited.add(task.id)
-        node.group = task.state
+        if task.state:
+            node.group = task.state
+        else:
+            node.group = "unknown"
         nodes
         if task.depends:
             dep_tasks: List[Task] = task.get_dependencies()
@@ -55,11 +58,14 @@ class Graph:
 
     def get_label(self, task: Task):
         label = "ID: " + task.id[0:6] + "\n"
-        label += "Run At: " + task.ts.strftime("%Y-%m-%d %H:%M:%S") + "\n"
-        label += "Queue: " + task.queue + "\n"
-        label += "State: " + task.state + "\n"
-        label += "Func: " + task.serialized_func + "\n"
-        label += "Args: " + str(task.args) + " " + str(task.kwargs) + "\n"
+        if task.state:
+            label += "Run At: " + task.ts.strftime("%Y-%m-%d %H:%M:%S") + "\n"
+            label += "Queue: " + task.queue + "\n"
+            label += "State: " + task.state + "\n"
+            label += "Func: " + task.serialized_func + "\n"
+            label += "Args: " + str(task.args) + " " + str(task.kwargs) + "\n"
+        else:
+            label += "Not Found" + "\n"
         return label
 
 

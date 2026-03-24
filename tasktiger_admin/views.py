@@ -100,6 +100,7 @@ class TaskTigerView(BaseView):
             self.integration_config.get("INTEGRATION_LINKS", []), task, None
         )
 
+        task_deps = task.get_dependencies()
         return self.render(
             "tasktiger_admin/tasktiger_task_detail.html",
             queue=queue,
@@ -109,7 +110,7 @@ class TaskTigerView(BaseView):
             task_data_dumped=json.dumps(task.data, indent=2, sort_keys=True),
             executions_dumped=reversed(executions_dumped),
             integrations=integrations,
-            task_dependencies=task.get_dependencies(),
+            task_dependencies=task_deps,
         )
 
     @expose("/<queue>/<state>/<task_id>/graph/")
@@ -121,8 +122,8 @@ class TaskTigerView(BaseView):
                 default=lambda x: x.__dict__,
                 indent=2)
             return json_data
-        except TaskNotFound:
-            abort(404)        
+        except Exception as ex:
+            abort(500)      
     
     @expose("/<queue>/<state>/<task_id>/retry/", methods=["POST"])
     def task_retry(self, queue, state, task_id):

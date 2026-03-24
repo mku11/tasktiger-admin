@@ -79,6 +79,12 @@ function load_graph_data(data) {
                 shape: 'box',
                 mass: 2
             },
+            unknown: {
+                color: { background: "#d43b3b" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            }
         }
     };
     var network = new vis.Network(container, visData, options);

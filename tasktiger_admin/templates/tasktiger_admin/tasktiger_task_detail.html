@@ -59,10 +59,12 @@
                     {% for task in task_dependencies %}
                         <div>
                             <a href="../../../{{ task.queue }}/{{ task.state }}/{{ task.id }}" target="_blank">{{ task.id[:6] }}</a>
+                            {% if task.state %}
                             | {{ task.state }}
                             | {{ task.ts.strftime("%Y-%m-%d %H:%M:%S") }}
                             | {{ task.serialized_func }}
                             | {{ task.args }} {{ task.kwargs }}
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </details>
