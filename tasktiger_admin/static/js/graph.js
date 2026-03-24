@@ -37,7 +37,7 @@ function load_graph_data(data) {
         layout: {
             randomSeed: 0,
             improvedLayout: true,
-            hierarchical: false
+            hierarchical: getTreeLayout()
         },
         physics: {
             enabled: false
@@ -57,6 +57,20 @@ function load_graph_data(data) {
         // workaround for resizing
         container.style.height = '300px';
     });
+}
+
+function getTreeLayout() {
+    return {
+        direction: "RL",
+        sortMethod: 'directed',
+        parentCentralization: true,
+        edgeMinimization: true,
+        levelSeparation: 400,
+        nodeSpacing: 200,
+        treeSpacing: 300,
+        blockShifting: true,
+        shakeTowards: 'leaves'
+    };
 }
 
 window.addEventListener("load", event => {

@@ -25,22 +25,27 @@ class Graph:
         nodes: Dict[str, VisNode],
         edges: Dict[str, VisNode],
         visited: set[str],
+        level: int = 0
     ):
         if not task:
             return
+
+        node: VisNode | None = None
+
         if task.id in visited:
             return
         label = self.get_label(task)
         # colors for nodes can be set in groups on the js side
         node: VisNode = VisNode(task.id, label)
         nodes[task.id] = node
+        node.level = level
         visited.add(task.id)
         node.group = "task"
         nodes
         if task.depends:
             dep_tasks: List[Task] = task.get_dependencies()
             for dep_task in dep_tasks:
-                self.generate_node_edges(dep_task, nodes, edges, visited)
+                self.generate_node_edges(dep_task, nodes, edges, visited, level+1)
                 edge_id: str = dep_task.id + "->" + node.id
                 if edge_id not in edges:
                     edge = VisEdge(edge_id, "", dep_task.id, node.id, arrows=Arrows())
@@ -68,6 +73,7 @@ class VisNode:
     def __init__(self, id: str, label: str, group: str = None):
         self.id: str = id
         self.label: str = label
+        self.level: int = 0
         if group:
             self.group: str = group
 
