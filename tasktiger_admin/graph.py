@@ -45,7 +45,7 @@ class Graph:
         if task.depends:
             dep_tasks: List[Task] = task.get_dependencies()
             for dep_task in dep_tasks:
-                self.generate_node_edges(dep_task, nodes, edges, visited, level+1)
+                self.generate_node_edges(dep_task, nodes, edges, visited, level + 1)
                 edge_id: str = dep_task.id + "->" + node.id
                 if edge_id not in edges:
                     edge = VisEdge(edge_id, "", dep_task.id, node.id, arrows=Arrows())
