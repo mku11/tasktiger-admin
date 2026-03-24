@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Dict, List
 from tasktiger import Task, TaskNotFound
+from tasktiger._internal import COMPLETED
 
 
 class Graph:
@@ -13,7 +14,12 @@ class Graph:
         nodes: Dict[str, VisNode] = {}
         edges: Dict[str, VisEdge] = {}
         visited: set[str] = set()
-        task: Task = Task.from_id(tiger, queue, state, task_id)
+        try:
+            task: Task = Task.from_id(tiger, queue, state, task_id)
+        except:
+            # check completion state
+            if state != COMPLETED:
+                task: Task = Task.from_id(tiger, queue, COMPLETED, task_id)
         self.generate_node_edges(task, nodes, edges, visited)
 
         visData: VisData = VisData(list(nodes.values()), list(edges.values()))
