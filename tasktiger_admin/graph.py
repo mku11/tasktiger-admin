@@ -40,7 +40,7 @@ class Graph:
         nodes[task.id] = node
         node.level = level
         visited.add(task.id)
-        node.group = "task"
+        node.group = task.state
         nodes
         if task.depends:
             dep_tasks: List[Task] = task.get_dependencies()

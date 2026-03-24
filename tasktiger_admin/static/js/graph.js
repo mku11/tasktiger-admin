@@ -43,8 +43,38 @@ function load_graph_data(data) {
             enabled: false
         },
         groups: {
-            task: {
-                color: { background: "#ccd4f3" },
+            completed: {
+                color: { background: "#8ed1f0" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            },
+            active: {
+                color: { background: "#8ef0a3" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            },
+            waiting: {
+                color: { background: "#d3e473" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            },
+            scheduled: {
+                color: { background: "#b173e4" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            },
+            queued: {
+                color: { background: "#73e4de" },
+                borderWidth: 2,
+                shape: 'box',
+                mass: 2
+            },
+            error: {
+                color: { background: "#f07272" },
                 borderWidth: 2,
                 shape: 'box',
                 mass: 2
