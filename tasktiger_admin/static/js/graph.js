@@ -101,9 +101,9 @@ function getTreeLayout() {
         sortMethod: 'directed',
         parentCentralization: true,
         edgeMinimization: true,
-        levelSeparation: 400,
-        nodeSpacing: 200,
-        treeSpacing: 300,
+        levelSeparation: 600,
+        nodeSpacing: 300,
+        treeSpacing: 600,
         blockShifting: true,
         shakeTowards: 'leaves'
     };

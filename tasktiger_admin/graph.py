@@ -2,7 +2,9 @@ from __future__ import annotations
 from typing import Dict, List
 from tasktiger import Task, TaskNotFound
 from tasktiger._internal import COMPLETED
+import textwrap
 
+WRAP_MAX_CHARS = 40
 
 class Graph:
     def __init__(self):
@@ -69,11 +71,14 @@ class Graph:
             label += "Queue: " + task.queue + "\n"
             label += "State: " + task.state + "\n"
             label += "Func: " + task.serialized_func + "\n"
-            label += "Args: " + str(task.args) + " " + str(task.kwargs) + "\n"
+            label += "args: " + self.wrap(str(task.args)) + "\n"
+            label += "kwargs: " + self.wrap(str(task.kwargs)) + "\n"
         else:
             label += "Not Found" + "\n"
         return label
 
+    def wrap(self, text: str):
+        return textwrap.fill(text, width=WRAP_MAX_CHARS)
 
 class VisData:
     def __init__(self, nodes: List[VisNode], edges: List[VisEdge]):
